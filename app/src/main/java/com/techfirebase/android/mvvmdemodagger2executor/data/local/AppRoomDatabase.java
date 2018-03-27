@@ -17,9 +17,9 @@ public abstract class AppRoomDatabase extends RoomDatabase {
   public abstract WordDao wordDao();
 
   /*
-   * To make the singleton object of this class we can also use Dagger2 Api
+   * To make the singleton object of this class we have used Dagger2 Api
    */
-  private static AppRoomDatabase INSTANCE;
+  /*private static AppRoomDatabase INSTANCE;
 
   public static synchronized AppRoomDatabase getDatabase(final Context context) {
     if (INSTANCE == null) {
@@ -30,5 +30,5 @@ public abstract class AppRoomDatabase extends RoomDatabase {
                 .build();
     }
     return INSTANCE;
-  }
+  }*/
 }
