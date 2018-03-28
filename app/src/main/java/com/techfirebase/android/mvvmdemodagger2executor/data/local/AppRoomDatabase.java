@@ -16,19 +16,5 @@ import com.techfirebase.android.mvvmdemodagger2executor.data.local.db.dao.WordDa
 public abstract class AppRoomDatabase extends RoomDatabase {
   public abstract WordDao wordDao();
 
-  /*
-   * To make the singleton object of this class we have used Dagger2 Api
-   */
-  /*private static AppRoomDatabase INSTANCE;
-
-  public static synchronized AppRoomDatabase getDatabase(final Context context) {
-    if (INSTANCE == null) {
-      if (INSTANCE == null)
-        INSTANCE =
-            Room.databaseBuilder(
-                    context.getApplicationContext(), AppRoomDatabase.class, "word_database")
-                .build();
-    }
-    return INSTANCE;
-  }*/
+  /** Provide singleton object of this class from AppModule */
 }

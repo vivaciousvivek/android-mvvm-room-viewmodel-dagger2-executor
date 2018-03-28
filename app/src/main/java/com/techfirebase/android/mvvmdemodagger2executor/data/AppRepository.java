@@ -10,15 +10,17 @@ import com.techfirebase.android.mvvmdemodagger2executor.data.local.db.dao.WordDa
 
 import java.util.List;
 
-/** Created by DUKE SINGH on 24-03-2018. This class should be singleton. */
-public class AppRepository {
-  private AppRoomDatabase db;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-  /*
-   * We can also inject required dependencies by Dagger 2 here
-   */
-  public AppRepository(Application application) {
-    db = AppRoomDatabase.getDatabase(application);
+/** Created by DUKE SINGH on 24-03-2018. */
+@Singleton
+public class AppRepository {
+  private final AppRoomDatabase db;
+
+  @Inject
+  public AppRepository(AppRoomDatabase db) {
+    this.db = db;
   }
 
   /**
