@@ -10,15 +10,17 @@ import com.techfirebase.android.mvvmdemodagger2executor.data.domain.entity.Word;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by DUKE SINGH on 24-03-2018.
  */
 public class WordViewModel extends AndroidViewModel{
-    private AppRepository repository;
+    @Inject
+    AppRepository repository;
 
     public WordViewModel(@NonNull Application application) {
         super(application);
-        repository = new AppRepository(application);
     }
 
     public LiveData<List<Word>> getAllWords() {

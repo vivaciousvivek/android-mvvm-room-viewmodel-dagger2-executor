@@ -1,10 +1,13 @@
 package com.techfirebase.android.mvvmdemodagger2executor.di.component;
 
+import android.app.Application;
+
 import com.techfirebase.android.mvvmdemodagger2executor.MvvmApp;
 import com.techfirebase.android.mvvmdemodagger2executor.di.module.AppModule;
 
 import javax.inject.Singleton;
 
+import dagger.BindsInstance;
 import dagger.Component;
 
 /**
@@ -30,6 +33,14 @@ public interface AppComponent {
    */
   void inject(MvvmApp mvvmApp);
 
-  // TODO: 3/28/2018 need to provide methods for other application components by getters method or
-  // Builder interface
+  /**
+   * Dagger allows us to customize the generated builder by @Component.Builder
+   */
+  @Component.Builder
+  interface Builder {
+    @BindsInstance
+    Builder application(Application application);
+
+    AppComponent build();
+  }
 }
