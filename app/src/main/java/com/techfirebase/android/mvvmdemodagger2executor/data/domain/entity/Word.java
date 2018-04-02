@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-/** Created by DUKE SINGH on 24-03-2018. */
+/** Created by VIVEK KUMAR SINGH on 3/24/2018. */
 @Entity
 public class Word {
   @PrimaryKey @NonNull private String word;

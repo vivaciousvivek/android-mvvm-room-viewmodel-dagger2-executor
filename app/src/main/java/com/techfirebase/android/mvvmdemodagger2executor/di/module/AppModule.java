@@ -4,7 +4,13 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepository;
+import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepositoryImpl;
 import com.techfirebase.android.mvvmdemodagger2executor.data.local.AppRoomDatabase;
+import com.techfirebase.android.mvvmdemodagger2executor.di.DatabaseInfo;
+import com.techfirebase.android.mvvmdemodagger2executor.utils.constant.AppConstants;
+import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.AppSchedulerProvider;
+import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.SchedulerProvider;
 
 import javax.inject.Singleton;
 
@@ -24,10 +30,9 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
-  // TODO: 3/27/2018 will use cutom annotation @DatabaseInfo for String field dbName
   @Provides
   @Singleton
-  AppRoomDatabase provideAppDatabase(final String dbName, final Context context) {
+  AppRoomDatabase provideAppDatabase(@DatabaseInfo final String dbName, final Context context) {
     //    return Room.databaseBuilder(context, AppRoomDatabase.class, "word_database").build();
     return Room.databaseBuilder(context, AppRoomDatabase.class, dbName)
         .fallbackToDestructiveMigration()
@@ -40,14 +45,20 @@ public class AppModule {
     return application;
   }
 
-  /*@Provides
+  @Provides
+  @Singleton
+  AppRepository provideAppRepository(final AppRepositoryImpl appRepositoryImpl) {
+    return appRepositoryImpl;
+  }
+
+  @Provides
   @DatabaseInfo
   String provideDatabaseName() {
-      return AppConstants.DB_NAME;
-  }*/
+    return AppConstants.DB_NAME.toString();
+  }
 
-  /*@Provides
+  @Provides
   SchedulerProvider provideSchedulerProvider() {
-      return new AppSchedulerProvider();
-  }*/
+    return new AppSchedulerProvider();
+  }
 }

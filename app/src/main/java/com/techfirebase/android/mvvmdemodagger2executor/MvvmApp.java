@@ -1,14 +1,18 @@
 package com.techfirebase.android.mvvmdemodagger2executor;
 
+import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 
-import com.techfirebase.android.mvvmdemodagger2executor.di.component.AppComponent;
 import com.techfirebase.android.mvvmdemodagger2executor.di.component.DaggerAppComponent;
-import com.techfirebase.android.mvvmdemodagger2executor.di.module.AppModule;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 
 /**
- * Created by DUKE SINGH on 3/27/2018.
+ * Created by VIVEK KUMAR SINGH on 3/27/2018.
  *
  * <p>DaggerApplicationComponent is the generated class by the Dagger, implementing the
  * ApplicationComponent. We provide the ApplicationModule class that is used to construct the
@@ -22,12 +26,9 @@ import com.techfirebase.android.mvvmdemodagger2executor.di.module.AppModule;
  * <p>Add name attribute of your application <application ... android:name=".MvvmApp" ....> //
  * activities </application>
  */
-public class MvvmApp extends Application {
-//  protected AppComponent appComponent;
+public class MvvmApp extends Application implements HasActivityInjector {
 
-  public static MvvmApp get(Context context) {
-    return (MvvmApp) context.getApplicationContext();
-  }
+  @Inject DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
   /**
    * Application class and MainActivity class. These classes don’t have a constructor and Android
@@ -54,5 +55,10 @@ public class MvvmApp extends Application {
      * <p>@Component.Builder
      */
     DaggerAppComponent.builder().application(this).build().inject(this);
+  }
+
+  @Override
+  public AndroidInjector<Activity> activityInjector() {
+    return activityDispatchingAndroidInjector;
   }
 }

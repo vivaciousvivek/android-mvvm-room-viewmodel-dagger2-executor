@@ -15,18 +15,8 @@ import java.util.List;
 /** Created by DUKE SINGH on 24-03-2018. */
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
-  class WordViewHolder extends RecyclerView.ViewHolder {
-    private final TextView wordItemView;
-
-    private WordViewHolder(View itemView) {
-      super(itemView);
-      wordItemView = itemView.findViewById(R.id.textView);
-    }
-  }
-
   private final LayoutInflater mInflater;
   private List<Word> mWords; // Cached copy of words
-
   public WordListAdapter(Context context) {
     mInflater = LayoutInflater.from(context);
   }
@@ -58,5 +48,14 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
   public void setWords(List<Word> words) {
     mWords = words;
     notifyDataSetChanged();
+  }
+
+  class WordViewHolder extends RecyclerView.ViewHolder {
+    private final TextView wordItemView;
+
+    private WordViewHolder(View itemView) {
+      super(itemView);
+      wordItemView = itemView.findViewById(R.id.textView);
+    }
   }
 }

@@ -9,10 +9,10 @@ import com.techfirebase.android.mvvmdemodagger2executor.data.domain.entity.Word;
 
 import java.util.List;
 
-/** Created by DUKE SINGH on 24-03-2018. */
+/** Created by VIVEK KUMAR SINGH on 3/24/2018. */
 @Dao
 public interface WordDao {
-//  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  //  @Insert(onConflict = OnConflictStrategy.REPLACE)
   @Insert
   void insert(Word word);
 

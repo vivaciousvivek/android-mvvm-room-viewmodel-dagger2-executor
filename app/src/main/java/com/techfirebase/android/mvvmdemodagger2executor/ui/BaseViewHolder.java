@@ -1,8 +1,16 @@
 package com.techfirebase.android.mvvmdemodagger2executor.ui;
 
-/**
- * Created by DUKE SINGH on 24-03-2018.
- */
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-public class BaseViewHolder {
+/**
+ * Created by VIVEK KUMAR SINGH on 3/27/2018.
+ *
+ * <p>Base View Holder that basically used in every application
+ */
+public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
+
+  public BaseViewHolder(View itemView) {
+    super(itemView);
+  }
 }

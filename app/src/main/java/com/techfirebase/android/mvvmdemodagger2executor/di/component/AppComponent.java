@@ -3,15 +3,17 @@ package com.techfirebase.android.mvvmdemodagger2executor.di.component;
 import android.app.Application;
 
 import com.techfirebase.android.mvvmdemodagger2executor.MvvmApp;
+import com.techfirebase.android.mvvmdemodagger2executor.di.builder.ActivityBuilder;
 import com.techfirebase.android.mvvmdemodagger2executor.di.module.AppModule;
 
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
 
 /**
- * Created by DUKE SINGH on 3/27/2018.
+ * Created by ﻿VIVEK KUMAR SINGH on 3/27/2018.
  *
  * <p>AppComponent is responsible for injecting all modules required of our application like
  * AppModule, ActivityModule, etc.
@@ -22,7 +24,7 @@ import dagger.Component;
  * <p>AppComponent is an interface that is implemented by Dagger2 Using @Component
  */
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class})
 public interface AppComponent {
   /**
    * When the dependencies are provided through field injection i.e. @inject on the member
@@ -33,9 +35,7 @@ public interface AppComponent {
    */
   void inject(MvvmApp mvvmApp);
 
-  /**
-   * Dagger allows us to customize the generated builder by @Component.Builder
-   */
+  /** Dagger allows us to customize the generated builder by @Component.Builder */
   @Component.Builder
   interface Builder {
     @BindsInstance

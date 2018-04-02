@@ -1,8 +1,4 @@
 package com.techfirebase.android.mvvmdemodagger2executor.ui;
 
-/**
- * Created by DUKE SINGH on 24-03-2018.
- */
-
-public class BaseDialogFragment {
-}
+/** Created by VIVEK KUMAR SINGH on 3/27/2018. */
+public class BaseDialogFragment {}

@@ -29,6 +29,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // To generate data binding classes
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -54,6 +59,10 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
 
     // local unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
