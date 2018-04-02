@@ -64,6 +64,12 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
 
+    // retrofit for REST API call
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+//    implementation "com.squareup.retrofit2:retrofit-mock:$rootProject.retrofit"
+
+
     // local unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
 

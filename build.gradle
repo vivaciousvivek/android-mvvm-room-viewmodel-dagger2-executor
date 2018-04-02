@@ -33,6 +33,7 @@ ext {
     dagger2Version = '2.14.1'
     rxjava2Version = '2.1.9'
     rxandroidVersion = '2.0.2'
+    retrofit = '2.4.0'
     lifecycle = '1.1.0'
 
     // Test dependencies

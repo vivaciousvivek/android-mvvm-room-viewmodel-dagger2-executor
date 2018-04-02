@@ -33,11 +33,16 @@ public class AppModule {
   @Provides
   @Singleton
   AppRoomDatabase provideAppDatabase(@DatabaseInfo final String dbName, final Context context) {
-    //    return Room.databaseBuilder(context, AppRoomDatabase.class, "word_database").build();
     return Room.databaseBuilder(context, AppRoomDatabase.class, dbName)
         .fallbackToDestructiveMigration()
         .build();
   }
+
+//  @Provides
+//  @Singleton
+//  AppWebService provideAppWebService() {
+//    return new Retrofit
+//  }
 
   @Provides
   @Singleton
@@ -55,10 +60,5 @@ public class AppModule {
   @DatabaseInfo
   String provideDatabaseName() {
     return AppConstants.DB_NAME.toString();
-  }
-
-  @Provides
-  SchedulerProvider provideSchedulerProvider() {
-    return new AppSchedulerProvider();
   }
 }
