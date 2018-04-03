@@ -9,10 +9,7 @@ import android.support.annotation.WorkerThread;
 
 import com.techfirebase.android.mvvmdemodagger2executor.data.domain.api.ApiResponse;
 import com.techfirebase.android.mvvmdemodagger2executor.data.domain.api.Resource;
-import com.techfirebase.android.mvvmdemodagger2executor.data.domain.entity.Word;
 import com.techfirebase.android.mvvmdemodagger2executor.utils.executor.AppExecutor;
-
-import java.util.List;
 
 /**
  * Created by VIVEK KUMAR SINGH on 4/2/2018.
@@ -44,6 +41,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
      * thread, you can use postValue(Object)
      */
     result.setValue(Resource.loading(null));
+
     LiveData<ResultType> dbSource = loadFromDb();
     result.addSource(
         dbSource,
@@ -65,7 +63,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
    */
   private void fetchFromNetwork(final LiveData<ResultType> dbSource) {
     // TODO: 4/2/2018 need to check how to do extract data from list of words(response)
-    LiveData<ApiResponse<List<Word>>> apiResponse = createCall();
+    LiveData<ApiResponse<RequestType>> apiResponse = createCall();
     // we re-attach dbSource as a new source, it will dispatch its latest value quickly
     result.addSource(dbSource, newData -> setValue(Resource.loading(newData)));
     result.addSource(
@@ -75,8 +73,9 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
           result.removeSource(dbSource);
 
           if (response.isSuccessful()) {
+            appExecutor.getDiskIO().execute(() -> saveCallResult(processResponse(response)));
             appExecutor
-                .getDiskIO()
+                .getMainThread()
                 .execute(
                     () ->
                         /**
@@ -99,6 +98,11 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     //    if (!Objects.equals(result.getValue(), newValue))
     if (result.getValue() != null && newValue != null && !result.getValue().equals(newValue))
       result.setValue(newValue);
+  }
+
+  @WorkerThread
+  private RequestType processResponse(ApiResponse<RequestType> response) {
+    return response.body;
   }
 
   /**
@@ -143,7 +147,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
    */
   @NonNull
   @MainThread
-  protected abstract LiveData<ApiResponse<List<Word>>> createCall();
+  protected abstract LiveData<ApiResponse<RequestType>> createCall();
 
   /**
    * Called when the fetch fails. The child class may want to reset components like rate limiter.

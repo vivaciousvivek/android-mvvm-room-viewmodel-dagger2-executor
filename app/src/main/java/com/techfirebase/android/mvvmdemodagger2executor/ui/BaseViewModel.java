@@ -3,7 +3,6 @@ package com.techfirebase.android.mvvmdemodagger2executor.ui;
 import android.arch.lifecycle.ViewModel;
 
 import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepository;
-import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.SchedulerProvider;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -11,14 +10,12 @@ import io.reactivex.disposables.CompositeDisposable;
 public abstract class BaseViewModel<N> extends ViewModel {
 
   private final AppRepository appRepository;
-  private final SchedulerProvider schedulerProvider;
   private final CompositeDisposable compositeDisposable;
   //    private final ObservableBoolean isLoading = new ObservableBoolean(false);
   private N navigator;
 
-  public BaseViewModel(AppRepository appRepository, SchedulerProvider schedulerProvider) {
+  public BaseViewModel(AppRepository appRepository) {
     this.appRepository = appRepository;
-    this.schedulerProvider = schedulerProvider;
 
     this.compositeDisposable = new CompositeDisposable();
   }
@@ -32,10 +29,6 @@ public abstract class BaseViewModel<N> extends ViewModel {
 
   public AppRepository getAppRepository() {
     return appRepository;
-  }
-
-  public SchedulerProvider getSchedulerProvider() {
-    return schedulerProvider;
   }
 
   public CompositeDisposable getCompositeDisposable() {

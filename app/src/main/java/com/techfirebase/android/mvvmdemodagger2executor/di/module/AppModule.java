@@ -7,15 +7,16 @@ import android.content.Context;
 import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepository;
 import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepositoryImpl;
 import com.techfirebase.android.mvvmdemodagger2executor.data.local.AppRoomDatabase;
+import com.techfirebase.android.mvvmdemodagger2executor.data.remote.AppRetrofitApi;
 import com.techfirebase.android.mvvmdemodagger2executor.di.DatabaseInfo;
 import com.techfirebase.android.mvvmdemodagger2executor.utils.constant.AppConstants;
-import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.AppSchedulerProvider;
-import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.SchedulerProvider;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by DUKE SINGH on 26-03-2018.
@@ -38,11 +39,27 @@ public class AppModule {
         .build();
   }
 
-//  @Provides
-//  @Singleton
-//  AppWebService provideAppWebService() {
-//    return new Retrofit
-//  }
+  @Provides
+  @Singleton
+  AppRetrofitApi provideAppWebService() {
+    return new Retrofit.Builder()
+        .baseUrl(AppConstants.BASE_URL.toString())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(AppRetrofitApi.class);
+
+    // This will be used to convert call object into our custom response object
+    /*return new Retrofit.Builder()
+    .baseUrl(AppConstants.BASE_URL.toString())
+    .addConverterFactory(GsonConverterFactory.create())
+    .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+    .build()
+    .create(AppRetrofitApi.class);*/
+
+    // .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    // With this adapter being applied the Retrofit interfaces are able to return RxJava 2.x types,
+    // e.g., Observable, Flowable or Single and so on.
+  }
 
   @Provides
   @Singleton

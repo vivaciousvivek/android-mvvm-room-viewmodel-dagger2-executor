@@ -3,6 +3,7 @@ package com.techfirebase.android.mvvmdemodagger2executor.data.local.db.dao;
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.techfirebase.android.mvvmdemodagger2executor.data.domain.entity.Word;
@@ -21,4 +22,7 @@ public interface WordDao {
 
   @Query("SELECT * from Word ORDER BY word ASC")
   LiveData<List<Word>> getAllWords();
+
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  void insertAll(List<Word> item);
 }

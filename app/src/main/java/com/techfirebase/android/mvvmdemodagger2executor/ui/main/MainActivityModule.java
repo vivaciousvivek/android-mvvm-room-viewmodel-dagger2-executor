@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import com.techfirebase.android.mvvmdemodagger2executor.ViewModelProviderFactory;
 import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepository;
-import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.SchedulerProvider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -25,7 +24,7 @@ public class MainActivityModule {
 
   @Provides
   MainViewModel provideMainViewModel(
-      AppRepository appRepository, SchedulerProvider schedulerProvider) {
-    return new MainViewModel(appRepository, schedulerProvider);
+      AppRepository appRepository) {
+    return new MainViewModel(appRepository);
   }
 }

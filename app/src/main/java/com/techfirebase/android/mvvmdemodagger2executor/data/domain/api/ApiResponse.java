@@ -3,7 +3,6 @@ package com.techfirebase.android.mvvmdemodagger2executor.data.domain.api;
 import android.support.annotation.Nullable;
 
 import java.io.IOException;
-import java.util.Map;
 
 import retrofit2.Response;
 

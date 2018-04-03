@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.techfirebase.android.mvvmdemodagger2executor.BR;
 import com.techfirebase.android.mvvmdemodagger2executor.R;
+import com.techfirebase.android.mvvmdemodagger2executor.data.domain.api.Resource;
 import com.techfirebase.android.mvvmdemodagger2executor.data.domain.entity.Word;
 import com.techfirebase.android.mvvmdemodagger2executor.databinding.ActivityMainBinding;
 import com.techfirebase.android.mvvmdemodagger2executor.ui.BaseActivity;
@@ -58,7 +59,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
   @Override
   public MainViewModel getViewModel() {
     mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel.class);
-    //    mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     return mainViewModel;
   }
 
@@ -79,8 +79,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     activityMainBinding = getViewDataBinding();
     mainViewModel.setNavigator(this);
 
-    //    setContentView(R.layout.activity_main);
-
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
@@ -90,7 +88,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     // Get a new or existing ViewModel from the ViewModelProvider.
-    mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+    //    mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
     // Add an observer on the LiveData returned by getAlphabetizedWords.
     // The onChanged() method fires when the observed data changes and the activity is
@@ -99,12 +97,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         .getAllWords()
         .observe(
             this,
-            new Observer<List<Word>>() {
+            new Observer<Resource<List<Word>>>() {
               @Override
+              public void onChanged(@Nullable Resource<List<Word>> wordResource) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setWords(wordResource == null ? null : wordResource.data);
+              }
+              /*@Override
               public void onChanged(@Nullable final List<Word> words) {
                 // Update the cached copy of the words in the adapter.
                 adapter.setWords(words);
-              }
+              }*/
             });
 
     FloatingActionButton fab = findViewById(R.id.fab);

@@ -1,7 +1,6 @@
 package com.techfirebase.android.mvvmdemodagger2executor.ui.word;
 
 import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepository;
-import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.SchedulerProvider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,7 +15,7 @@ import dagger.Provides;
 public class WordActivityModule {
   @Provides
   WordViewModel provideWordViewModel(
-      AppRepository appRepository, SchedulerProvider schedulerProvider) {
-    return new WordViewModel(appRepository, schedulerProvider);
+      AppRepository appRepository) {
+    return new WordViewModel(appRepository);
   }
 }

@@ -3,9 +3,9 @@ package com.techfirebase.android.mvvmdemodagger2executor.ui.main;
 import android.arch.lifecycle.LiveData;
 
 import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepository;
+import com.techfirebase.android.mvvmdemodagger2executor.data.domain.api.Resource;
 import com.techfirebase.android.mvvmdemodagger2executor.data.domain.entity.Word;
 import com.techfirebase.android.mvvmdemodagger2executor.ui.BaseViewModel;
-import com.techfirebase.android.mvvmdemodagger2executor.utils.rx.SchedulerProvider;
 
 import java.util.List;
 
@@ -18,19 +18,27 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
 
   AppRepository repository;
 
-  public MainViewModel(AppRepository appRepository, SchedulerProvider schedulerProvider) {
-    super(appRepository, schedulerProvider);
+  public MainViewModel(AppRepository appRepository) {
+    super(appRepository);
     this.repository = appRepository;
     //    getAllWords();
   }
 
-  public LiveData<List<Word>> getAllWords() {
-    return repository.getAllWords();
+  public LiveData<Resource<List<Word>>> getAllWords() {
+    return repository.loadWords();
   }
 
   public void insert(Word word) {
     repository.insert(word);
   }
+
+  /*public LiveData<List<Word>> getAllWords() {
+    return repository.getAllWords();
+  }
+
+  public void insert(Word word) {
+    repository.insert(word);
+  }*/
 
   //  public void getAllWords() {
   //    getCompositeDisposable().add(getAppRepository().getAllWords())

@@ -31,14 +31,15 @@ public class AppRepositoryImpl implements AppRepository {
     this.appExecutor = appExecutor;
   }
 
-  public LiveData<Resource<List<Word>>> loadWord(String word) {
-    return new NetworkBoundResource<List<Word>, Word>(appExecutor) {
+  @Override
+  public LiveData<Resource<List<Word>>> loadWords() {
+    return new NetworkBoundResource<List<Word>, List<Word>>(appExecutor) {
       /*
        * Implement abstract methods of this class
        */
       @Override
-      protected void saveCallResult(@NonNull Word item) {
-        db.wordDao().insert(item);
+      protected void saveCallResult(@NonNull List<Word> item) {
+        db.wordDao().insertAll(item);
       }
 
       @Override
@@ -72,10 +73,10 @@ public class AppRepositoryImpl implements AppRepository {
    *
    * @return
    */
-  @Override
+  /*@Override
   public LiveData<List<Word>> getAllWords() {
     return db.wordDao().getAllWords();
-  }
+  }*/
 
   /**
    * Room ensures that you don't do any long-running operations on the main thread, blocking the UI.
