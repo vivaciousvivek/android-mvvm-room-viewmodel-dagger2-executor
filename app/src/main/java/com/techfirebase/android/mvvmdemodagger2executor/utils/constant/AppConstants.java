@@ -5,7 +5,14 @@ package com.techfirebase.android.mvvmdemodagger2executor.utils.constant;
  * <p>Application Constants
  */
 public enum AppConstants {
-  DB_NAME("word_database"), BASE_URL("http://localhost:3000/");
+  /**
+   * BASE_URL("http://192.168.170.66:3000/") for Device BASE_URL("http://10.0.2.2:3000/") for
+   * Emulator
+   */
+  DB_NAME("word_database"),
+//    BASE_URL("http://jsonplaceholder.typicode.com/");
+//  BASE_URL("http://192.168.170.66:3000/");
+  BASE_URL("http://10.0.2.2:3000/");
 
   private final String constant;
 

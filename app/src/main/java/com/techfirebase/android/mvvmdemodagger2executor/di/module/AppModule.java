@@ -9,6 +9,7 @@ import com.techfirebase.android.mvvmdemodagger2executor.data.AppRepositoryImpl;
 import com.techfirebase.android.mvvmdemodagger2executor.data.local.AppRoomDatabase;
 import com.techfirebase.android.mvvmdemodagger2executor.data.remote.AppRetrofitApi;
 import com.techfirebase.android.mvvmdemodagger2executor.di.DatabaseInfo;
+import com.techfirebase.android.mvvmdemodagger2executor.utils.LiveDataCallAdapterFactory;
 import com.techfirebase.android.mvvmdemodagger2executor.utils.constant.AppConstants;
 
 import javax.inject.Singleton;
@@ -45,6 +46,7 @@ public class AppModule {
     return new Retrofit.Builder()
         .baseUrl(AppConstants.BASE_URL.toString())
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(new LiveDataCallAdapterFactory())
         .build()
         .create(AppRetrofitApi.class);
 

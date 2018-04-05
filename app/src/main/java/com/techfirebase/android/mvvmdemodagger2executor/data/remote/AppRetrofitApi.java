@@ -17,7 +17,7 @@ import retrofit2.http.POST;
  * <p>REST API access points
  */
 public interface AppRetrofitApi {
-  @GET("word")
+  @GET("/word")
   LiveData<ApiResponse<List<Word>>> getAllWords();
 
   @POST("word")

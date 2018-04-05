@@ -44,7 +44,8 @@ public class AppRepositoryImpl implements AppRepository {
 
       @Override
       protected boolean shouldFetch(@Nullable List<Word> data) {
-        return data == null || data.isEmpty();
+//        return data == null || data.isEmpty();
+        return true;
       }
 
       @NonNull
